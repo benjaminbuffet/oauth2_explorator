@@ -12,7 +12,7 @@ with tab1:
 
     st.header("Step 1", divider="grey")
     first_step_url = (
-        f"{st.secrets.kc.base_url}"
+        f"{st.secrets.kc.base_ext_url}"
         + f"/realms/{st.secrets.kc.realm}/protocol/openid-connect/auth?"
         + f"client_id={st.secrets.kc.client_id}&"
         + f"redirect_uri={urllib.parse.quote(st.secrets.kc.redirect_uri, safe='')}&"
@@ -32,7 +32,7 @@ with tab1:
         st.header("Step 3", divider="grey")
 
         third_step_url = (
-            f"{st.secrets.kc.base_url}"
+            f"{st.secrets.kc.base_int_url}"
             + f"/realms/{st.secrets.kc.realm}/protocol/openid-connect/token"
         )
 
@@ -70,7 +70,7 @@ with tab1:
 
 with tab2:
     well_know_url = (
-        f"{st.secrets.kc.base_url}"
+        f"{st.secrets.kc.base_int_url}"
         + f"/realms/{st.secrets.kc.realm}/"
         + ".well-known/openid-configuration"
     )

@@ -16,7 +16,7 @@ def is_logged_in():
 
 if "code" in st.query_params:
     third_step_url = (
-        f"{st.secrets.kc.base_url}"
+        f"{st.secrets.kc.base_int_url}"
         + f"/realms/{st.secrets.kc.realm}/protocol/openid-connect/token"
     )
 
@@ -43,7 +43,7 @@ if "code" in st.query_params:
 if not is_logged_in():
     redirect_uri = "http://localhost:8501/private"
     first_step_url = (
-        f"{st.secrets.kc.base_url}"
+        f"{st.secrets.kc.base_ext_url}"
         + f"/realms/{st.secrets.kc.realm}/protocol/openid-connect/auth?"
         + f"client_id={st.secrets.kc.client_id}&"
         + f"redirect_uri={urllib.parse.quote(redirect_uri, safe='')}&"

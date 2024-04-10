@@ -1,0 +1,24 @@
+services:
+  streamlit:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: streamlit
+    ports:
+      - 8501:8501
+    volumes:
+      - ./app:/app
+    networks:
+      - default
+  keycloak:
+    build: 
+      context: ./keycloak
+      dockerfile: Dockerfile
+    container_name: keycloak
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_ADMIN=admin 
+      - KEYCLOAK_ADMIN_PASSWORD=admin 
+    networks:
+      - default
