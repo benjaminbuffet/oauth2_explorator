@@ -50,13 +50,12 @@ with tab1:
         response = requests.post(third_step_url, data=body)
         json = response.json()
         st.write(json)
-
+        access_token = None
         if "access_token" in json:
+            access_token = json["access_token"]
             st.subheader("access_token")
             st.write(
-                jwt.decode(
-                    json["access_token"], options={"verify_signature": False}
-                )
+                jwt.decode(access_token, options={"verify_signature": False})
             )
 
         if "id_token" in json:
@@ -66,6 +65,23 @@ with tab1:
                     json["id_token"], options={"verify_signature": False}
                 )
             )
+
+        if access_token is not None:
+            st.header("Step 4", divider="grey")
+            header = {
+                "Authorization": f"Bearer {access_token}",
+            }
+            userinfo_url = (
+                f"{st.secrets.kc.base_url}"
+                + f"/realms/{st.secrets.kc.realm}"
+                + "/protocol/openid-connect/userinfo?"
+            )
+            userinfo_response = requests.get(
+                userinfo_url,
+                headers=header,
+            )
+            st.write(userinfo_response.status_code)
+            st.write(userinfo_response.json())
 
 
 with tab2:
