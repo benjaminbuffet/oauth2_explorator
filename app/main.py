@@ -72,7 +72,7 @@ with tab1:
                 "Authorization": f"Bearer {access_token}",
             }
             userinfo_url = (
-                f"{st.secrets.kc.base_url}"
+                f"{st.secrets.kc.base_int_url}"
                 + f"/realms/{st.secrets.kc.realm}"
                 + "/protocol/openid-connect/userinfo?"
             )
