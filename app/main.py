@@ -67,7 +67,8 @@ with tab1:
             )
 
         if access_token is not None:
-            st.header("Step 4", divider="grey")
+            st.header("Step 4 : userinfo", divider="grey")
+            st.subheader("Request")
             header = {
                 "Authorization": f"Bearer {access_token}",
             }
@@ -80,8 +81,14 @@ with tab1:
                 userinfo_url,
                 headers=header,
             )
-            st.write(userinfo_response.status_code)
-            st.write(userinfo_response.json())
+            st.text("Authorization: " + f"Bearer {access_token}")
+            st.text(userinfo_url)
+            if userinfo_response.status_code == 200:
+                
+                st.write(userinfo_response.json())
+            else:
+                st.write(userinfo_response.status_code)
+                st.write(userinfo_response.text)
 
 
 with tab2:
